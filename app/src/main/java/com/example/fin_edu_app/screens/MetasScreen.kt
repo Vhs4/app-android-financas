@@ -20,8 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Icon
+import androidx.navigation.NavController
 
 
 // Dados de exemplo
@@ -31,7 +32,7 @@ data class MetaItem(
 )
 
 @Composable
-fun SuasMetasScreen() {
+fun SuasMetasScreen(navController: NavController) {
  // Cores principais
  val backgroundBrush = Brush.verticalGradient(
   0f to Color(0xFF321C0B),  // Marrom final no topo (0%)
@@ -42,7 +43,7 @@ fun SuasMetasScreen() {
 
  )
 
-  val goldColor = Color(0xFFFFD700)      // Dourado mais fiel à imagem
+ val goldColor = Color(0xFFFFD700)      // Dourado mais fiel à imagem
  val cardColor = Color(0xFF1E1E1E)      // Fundo dos cartões
  val navBarColor = Color(0xFF212121)    // Cor da barra de navegação
 
@@ -110,7 +111,7 @@ fun SuasMetasScreen() {
       modifier = Modifier.weight(1f)
      ) {
       Icon(
-       imageVector = Icons.Filled.ChatBubble, // Ícone de troféu
+       imageVector = Icons.Filled.Create, // Ícone de troféu
        contentDescription = "Quiz",
        tint = goldColor,
        modifier = Modifier.size(35.dp)
@@ -126,7 +127,7 @@ fun SuasMetasScreen() {
     .padding(innerPadding)
     .fillMaxSize()
     .background(backgroundBrush))
-   {
+  {
    Column(
     modifier = Modifier.padding(horizontal = 16.dp)
    ) {
@@ -164,7 +165,7 @@ fun SuasMetasScreen() {
       ) {
        // Ícone de troféu
        Icon(
-        imageVector = Icons.Filled.EmojiEvents, // Ícone de medalha/troféu
+        imageVector = Icons.Filled.Star, // Ícone de medalha/troféu
         contentDescription = "Troféu",
         tint = goldColor,
         modifier = Modifier.size(40.dp)
@@ -205,7 +206,7 @@ fun SuasMetasScreen() {
       ) {
        // Ícone de medalha
        Icon(
-        imageVector = Icons.Filled.WorkspacePremium , // Ícone de medalha/troféu
+        imageVector = Icons.Filled.CheckCircle , // Ícone de medalha/troféu
         contentDescription = "Medalha",
         tint = goldColor,
         modifier = Modifier.size(40.dp)
@@ -224,6 +225,37 @@ fun SuasMetasScreen() {
         fontSize = 18.sp
        )
       }
+     }
+    }
+
+    Spacer(modifier = Modifier.height(24.dp))
+
+    Button(
+     onClick = { navController.navigate("quiz") },
+     modifier = Modifier
+      .fillMaxWidth()
+      .height(56.dp),
+     colors = ButtonDefaults.buttonColors(
+      containerColor = goldColor,
+      contentColor = Color.Black
+     ),
+     shape = RoundedCornerShape(12.dp)
+    ) {
+     Row(
+      verticalAlignment = Alignment.CenterVertically,
+      horizontalArrangement = Arrangement.Center
+     ) {
+      Icon(
+       imageVector = Icons.Filled.PlayArrow,
+       contentDescription = "Iniciar",
+       modifier = Modifier.size(24.dp)
+      )
+      Spacer(modifier = Modifier.width(8.dp))
+      Text(
+       text = "Iniciar jogo",
+       fontSize = 18.sp,
+       fontWeight = FontWeight.Bold
+      )
      }
     }
 
@@ -308,11 +340,4 @@ fun MetaRowItem(meta: MetaItem, accentColor: Color) {
    modifier = Modifier.size(18.dp)
   )
  }
-}
-
-// Preview
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewSuasMetasScreen() {
- SuasMetasScreen()
 }

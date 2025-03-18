@@ -107,7 +107,7 @@ fun LoginScreen(navController: NavController) {
             Button(
                 onClick = {
                     if (email.isNotEmpty() && password.isNotEmpty()) {
-                        navController.navigate("home")
+                        navController.navigate("goals")
                     } else {
                         Toast.makeText(context, "Preencha os campos!", Toast.LENGTH_SHORT).show()
                     }
@@ -122,7 +122,7 @@ fun LoginScreen(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.applogo), // Ícone de login
+                        painter = painterResource(id = R.drawable.applogo),
                         contentDescription = "Login",
                         modifier = Modifier.size(20.dp)
                     )
