@@ -20,11 +20,11 @@ class MainActivity : ComponentActivity() {
             FineduappTheme {
                 val navController = rememberNavController()
 
-                NavHost(navController = navController, startDestination = "login") {
+                NavHost(navController = navController, startDestination = "goals") {
                     composable("login") { LoginScreen(navController) }
                     composable("home") { HomeScreen(navController) }
                     composable("register") { CreateAccount(navController) }
-                    composable("quiz") { FinancialQuizScreen() }
+                    composable("quiz") { FinancialQuizScreen(navController) }
                     composable("goals") { SuasMetasScreen(navController) }
                 }
             }

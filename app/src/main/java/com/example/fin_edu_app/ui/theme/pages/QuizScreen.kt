@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 data class QuizQuestion(
     val question: String,
@@ -46,7 +47,7 @@ data class QuizQuestion(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun FinancialQuizScreen() {
+fun FinancialQuizScreen(navController: NavController) {
     val questions = listOf(
         QuizQuestion(
             "Para atingir uma estabilidade financeira, quando você tem que ter economizado?",
@@ -127,7 +128,8 @@ fun FinancialQuizScreen() {
                         selectedOptions = List(questions.size) { -1 }
                         quizCompleted = false
                         score = 0
-                    }
+                    },
+                    navController = navController
                 )
             } else {
                 // Quiz question screen
@@ -223,7 +225,9 @@ fun FinancialQuizScreen() {
                                             .size(32.dp)
                                             .border(
                                                 width = 2.dp,
-                                                color = if (selectedOptions[index] == optionIndex) Color(0xFFFFBF1C) else Color.White,
+                                                color = if (selectedOptions[index] == optionIndex) Color(
+                                                    0xFFFFBF1C
+                                                ) else Color.White,
                                                 shape = CircleShape
                                             ),
                                         contentAlignment = Alignment.Center
@@ -304,6 +308,7 @@ fun FinancialQuizScreen() {
 fun CompletionScreen(
     score: Int,
     totalQuestions: Int,
+    navController: NavController,
     onRestart: () -> Unit
 ) {
     Column(
@@ -409,6 +414,25 @@ fun CompletionScreen(
                 fontWeight = FontWeight.Medium
             )
         }
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Button(
+            onClick = { navController.navigate("goals") },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFFBF1C),
+                contentColor = Color.Black
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+        ) {
+            Text(
+                text = "Ir para minhas metas",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
     }
 }
 
@@ -487,10 +511,4 @@ fun QuoteIcon() {
             center = Offset(size.width * 0.65f, size.height * 0.55f)
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun FinancialQuizScreenPreview() {
-    FinancialQuizScreen()
 }
